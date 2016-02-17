@@ -69,8 +69,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\libxml2-2.7.8.win32\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\include;C:\boost_1_58_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\libxml2-2.7.8.win32\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\lib\opt;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\src;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\include;C:\boost_1_58_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\lib\opt;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\lib\Win32_Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\src;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\include;C:\boost_1_58_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\lib\opt;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\lib\Win32_Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,7 +84,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>mysqlcppconn.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mysqlcppconn.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,6 +109,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>mysqlcppconn.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,7 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DBConnect.cpp" />
+    <ClCompile Include="DBStringProcessor.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="XMLProcessor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DBConnect.h" />
+    <ClInclude Include="DBStringProcessor.h" />
+    <ClInclude Include="XMLProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

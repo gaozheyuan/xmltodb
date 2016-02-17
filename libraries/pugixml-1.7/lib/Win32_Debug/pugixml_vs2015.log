@@ -1,0 +1,13 @@
+﻿生成启动时间为 14-Feb-16 11:58:37 PM。
+     1>项目“C:\Users\Zheyuan Gao\Desktop\pugixml-1.7\scripts\pugixml_vs2015.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Z7 /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"vs2015\Win32_Debug\\" /Fd"vs2015\Win32_Debug\pugixml.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\pugixml.cpp
+         pugixml.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"vs2015\Win32_Debug\pugixml.lib" /NOLOGO vs2015\Win32_Debug\pugixml.obj
+         pugixml_vs2015.vcxproj -> C:\Users\Zheyuan Gao\Desktop\pugixml-1.7\scripts\vs2015\Win32_Debug\pugixml.lib
+     1>已完成生成项目“C:\Users\Zheyuan Gao\Desktop\pugixml-1.7\scripts\pugixml_vs2015.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:02.15
