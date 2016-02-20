@@ -7,6 +7,10 @@
 #include <cppconn/statement.h>
 #include "DBStringProcessor.h"
 #include "mysql_connection.h"
+#define HASHNAMETOTRUETABLENAME "hashnametotruename"
+#define HASHNAME "hashname"
+#define TRUETABLENAME "truetablename"
+#define NAMEINDEX "nameindex"
 #pragma once
 using namespace sql;
 using namespace std;
@@ -19,10 +23,18 @@ private:
 	sql::ResultSet *res;
 	string dbSchema;
 public:
+	//set up connection to mysql database
 	bool enableConnection(string hostName, string userName, string password);
+	//create schema in database
+	bool createSchema(string schemaName);
+	//create table in database
 	bool createTable(bool hasReferTable,string tableName, vector<string> columns,string referTableName="",string referColumn="");
-	bool existTable(string tableschema,string tableName);
+	//judge whether there is a table acoor
+	bool existTable(string tableName);
+	bool insertIntoTable(bool hasReferTable,string tableSchema, string tableName, vector<pair<string, string>> columnAndValue,string referTable="",string referColumn="",string referKeyValue="");
 	void setDbSchema(string dbSchema);
+	bool createTableOfHashNametoTrueName();
+	bool insertTableOfHashNametoTrueName(string hashname, string truename, string nameindex);
 	string getDbSchema();
 	DBConnect();
 	~DBConnect();
