@@ -7,10 +7,7 @@
 #include <cppconn/statement.h>
 #include "DBStringProcessor.h"
 #include "mysql_connection.h"
-#define HASHNAMETOTRUETABLENAME "hashnametotruename"
-#define HASHNAME "hashname"
-#define TRUETABLENAME "truetablename"
-#define NAMEINDEX "nameindex"
+#include "MACROS.h"
 #pragma once
 using namespace sql;
 using namespace std;
@@ -21,22 +18,34 @@ private:
 	sql::Connection *con;
 	sql::Statement *stmt;
 	sql::ResultSet *res;
-	string dbSchema;
 public:
+	DBConnect();
+	~DBConnect();
 	//set up connection to mysql database
-	bool enableConnection(string hostName, string userName, string password);
+	bool enableConnection(string hostName, string userName, string password,string schemaName);
+	//Do the initialization work
+	bool initialize();
 	//create schema in database
 	bool createSchema(string schemaName);
 	//create table in database
 	bool createTable(bool hasReferTable,string tableName, vector<string> columns,string referTableName="",string referColumn="");
-	//judge whether there is a table acoor
+	//judge whether there is a schema in db
+	bool existSchema(string schemaName);
+	//judge whether there is a table in db
 	bool existTable(string tableName);
-	bool insertIntoTable(bool hasReferTable,string tableSchema, string tableName, vector<pair<string, string>> columnAndValue,string referTable="",string referColumn="",string referKeyValue="");
-	void setDbSchema(string dbSchema);
+	//insert data into table
+	bool insertIntoTable(bool hasReferTable, string tableName, vector<pair<string, string>> columnAndValue,string referTable="",string referColumn="",string referKeyValue="");
+	//create table and return mainKey
+	bool insertIntoTableandReturnMainKey(bool hasReferTable, string tableName, vector<pair<string, string>> columnAndValue,string &mainKeyValue, string referTable = "", string referColumn = "", string referKeyValue = "");
+	//create table of hash name to true name mapping
 	bool createTableOfHashNametoTrueName();
+	//insert table of hash name to true name mapping
 	bool insertTableOfHashNametoTrueName(string hashname, string truename, string nameindex);
-	string getDbSchema();
-	DBConnect();
-	~DBConnect();
+	//look up result from a specific table by querying existing known column name
+	ResultSet* querybyExistingColumnName(string tableName, vector<pair<string, string>> columnAndValue);
+	//find all column names in a database
+	vector<string> findAllColumnsInDatabase(string tableName);
+	//add new columns into a table
+	bool addNewColumnsIntoTable(vector<string> newColumnVecs,string tableName);
 };
 

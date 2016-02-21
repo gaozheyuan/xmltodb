@@ -9,7 +9,7 @@ public:
 	DBStringProcessor();
 	~DBStringProcessor();
 	static string getMainKeyString(string tableName);
-	static string getForeignKeyString(string referTableName, string referColumn);
+	static string getForeignKeyString(string referTableName);
 	static string getOriginalTrueTableName(string originTableName);
 	static string getLowerCaseString(string originalString);
 };

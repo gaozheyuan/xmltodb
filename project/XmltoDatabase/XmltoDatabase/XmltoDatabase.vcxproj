@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="DBConnect.h" />
     <ClInclude Include="DBStringProcessor.h" />
+    <ClInclude Include="MACROS.h" />
     <ClInclude Include="XMLProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,9 +16,9 @@ string DBStringProcessor::getMainKeyString(string tableName)
 	return getLowerCaseString(tableName + "_ID");
 }
 
-string DBStringProcessor::getForeignKeyString(string referTableName, string referColumn)
+string DBStringProcessor::getForeignKeyString(string referTableName)
 {
-	return getLowerCaseString(referTableName + "_" + referColumn + "_key");
+	return getLowerCaseString(referTableName+"_key");
 }
 
 string DBStringProcessor::getOriginalTrueTableName(string originTableName)

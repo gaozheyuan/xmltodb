@@ -22,6 +22,7 @@ public:
 	bool read_xml_document(string fileName);
 	bool get_root_node(string firstChild);
 	bool process_node(bool hasReferTable, xml_node* currentNode,string referTableName="", string referColumn="",string referPrimaryKey="");
+	bool getExistingHashtoDBNameInfo();
 	XMLProcessor();
 	~XMLProcessor();
 };
