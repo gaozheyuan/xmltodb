@@ -1,3 +1,6 @@
+/*DBConnect class is responsible for maintaining the connection between the program and the Mysql
+database, and also manages the function directly interacting between the program and the database
+*/
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
