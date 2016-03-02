@@ -69,18 +69,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\src;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\include;C:\boost_1_60_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\lib\opt;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\lib\Win32_Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\libraries\pugixml-1.7\src;..\..\..\libraries\Connector.C++ 1.1\include;..\..\..\libraries\boost\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\libraries\iconv-1.9.2.win32\lib;..\..\..\libraries\Connector.C++ 1.1\lib\opt;..\..\..\libraries\pugixml-1.7\lib\Win32_Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\src;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\include;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\include;C:\boost_1_60_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\Connector.C++ 1.1\lib\opt;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\iconv-1.9.2.win32\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\zlib-1.2.5\lib;C:\Users\Zheyuan Gao\Documents\GitHub\xml2db\libraries\pugixml-1.7\lib\Win32_Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\libraries\pugixml-1.7\src;..\..\..\libraries\zlib-1.2.5\include;..\..\..\libraries\boost\include;..\..\..\libraries\Connector.C++ 1.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\libraries\Connector.C++ 1.1\lib\opt;..\..\..\libraries\iconv-1.9.2.win32\lib;..\..\..\libraries\zlib-1.2.5\lib;..\..\..\libraries\pugixml-1.7\lib\Win32_Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\vs workspace\xmltodb\libraries\pugixml-1.7\src;D:\vs workspace\xmltodb\libraries\zlib-1.2.5\include;D:\vs workspace\xmltodb\libraries\boost\include;D:\vs workspace\xmltodb\libraries\Connector.C++ 1.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\vs workspace\xmltodb\libraries\Connector.C++ 1.1\lib\opt;D:\vs workspace\xmltodb\libraries\iconv-1.9.2.win32\lib;D:\vs workspace\xmltodb\libraries\zlib-1.2.5\lib;D:\vs workspace\xmltodb\libraries\pugixml-1.7\lib\Win32_Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -104,6 +109,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -124,6 +130,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>mysqlcppconn.lib;pugixml.lib;mysqlcppconn-static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

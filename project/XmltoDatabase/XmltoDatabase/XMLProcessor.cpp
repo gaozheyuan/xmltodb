@@ -12,6 +12,7 @@ bool XMLProcessor::read_xml_document(string fileName)
 {
 	if (!doc.load_file(fileName.c_str()))
 		return false;
+	node = doc.root();
 	return true;
 }
 bool XMLProcessor::get_root_node(string firstChild)
@@ -26,10 +27,10 @@ bool XMLProcessor::process_node(bool hasReferTable, xml_node* currentNode, strin
 	string trueTableName;
 	string originalTrueTableName = DBStringProcessor::getOriginalTrueTableName(currentNode->name());
 	string hashTableValue = returnHashString(*currentNode);
-	string mainKeyValue="-1";
+	string mainKeyValue = "-1";
 	for (xml_node_iterator it = currentNode->begin(); it != currentNode->end(); ++it)
 	{
-		if(it->first_child().name()=="")
+		if (it->first_child().name() == "")
 		{
 			string column_name = DBStringProcessor::getOriginalTrueTableName(it->name());
 			cout << "name: " << it->name() << endl;
@@ -50,53 +51,65 @@ bool XMLProcessor::process_node(bool hasReferTable, xml_node* currentNode, strin
 			columnVec.push_back(it->first);
 		}
 	}
-	if (nodeToDBName[hashTableValue]=="")//if there is no corresponding table in database
+	if (nodeToDBName[hashTableValue] == "")//if there is no corresponding table in database
 	{
-		countSameNode[originalTrueTableName]++;//true name of table plus 1
-		char str[10];
-		_itoa_s(countSameNode[originalTrueTableName], str, 10);
-		cout << originalTrueTableName + "_" + string(str) << endl;
-		trueTableName =DBStringProcessor::getLowerCaseString(originalTrueTableName + "_" + string(str));
-		nodeToDBName[hashTableValue] = trueTableName;
-		dbConnect.insertTableOfHashNametoTrueName(hashTableValue, originalTrueTableName, string(str));
-		cout << "Table " + trueTableName << " has not been created in database" << endl;
-		if (hasReferTable)
+		if (currentNode->name() != "")//make sure it is not the root node
 		{
-			dbConnect.createTable(hasReferTable, trueTableName, columnVec, referTableName,DBStringProcessor::getMainKeyString(referTableName));
+			countSameNode[originalTrueTableName]++;//true name of table plus 1
+			char str[10];
+			_itoa_s(countSameNode[originalTrueTableName], str, 10);
+			cout << originalTrueTableName + "_" + string(str) << endl;
+			trueTableName = DBStringProcessor::getLowerCaseString(originalTrueTableName + "_" + string(str));
+			nodeToDBName[hashTableValue] = trueTableName;
+			dbConnect.insertTableOfHashNametoTrueName(hashTableValue, originalTrueTableName, string(str));
+			cout << "Table " + trueTableName << " has not been created in database" << endl;
+			if (hasReferTable)
+			{
+				dbConnect.createTable(hasReferTable, trueTableName, columnVec, referTableName, DBStringProcessor::getMainKeyString(referTableName));
+			}
+			else
+			{
+				dbConnect.createTable(hasReferTable, trueTableName, columnVec);
+			}
 		}
 		else
 		{
-			dbConnect.createTable(hasReferTable, trueTableName, columnVec);
+			cout << "Processing the root node!" << endl;
 		}
 	}
 	else
 	{
-		cout << "Table " + trueTableName + " has already been created in database"<<endl;
+		cout << "Table " + trueTableName + " has already been created in database" << endl;
 	}
 	trueTableName = nodeToDBName[hashTableValue];
-	if (hasReferTable)
+	if (currentNode->name() != "")
 	{
-		string referColumn = DBStringProcessor::getMainKeyString(referTableName);
-		dbConnect.insertIntoTableandReturnMainKey(hasReferTable,trueTableName, columnNameandValues,mainKeyValue,referTableName, referColumn, referPrimaryKey);
+		if (hasReferTable)
+		{
+			string referColumn = DBStringProcessor::getMainKeyString(referTableName);
+			dbConnect.insertIntoTableandReturnMainKey(hasReferTable, trueTableName, columnNameandValues, mainKeyValue, referTableName, referColumn, referPrimaryKey);
+		}
+		else
+		{
+			dbConnect.insertIntoTableandReturnMainKey(hasReferTable, trueTableName, columnNameandValues, mainKeyValue);
+		}
 	}
-	else
-	{	
-		dbConnect.insertIntoTableandReturnMainKey(hasReferTable,trueTableName, columnNameandValues,mainKeyValue);
-	}
-
 	for (int index = 0; index < childnodesVecs.size(); index++)
 	{
 		string childTableName = DBStringProcessor::getOriginalTrueTableName(childnodesVecs[index].name());
-		process_node(true, &childnodesVecs[index],trueTableName,DBStringProcessor::getMainKeyString(trueTableName), mainKeyValue);
+		if (currentNode->name() != "")
+			process_node(true, &childnodesVecs[index], trueTableName, DBStringProcessor::getMainKeyString(trueTableName), mainKeyValue);
+		else
+			process_node(false, &childnodesVecs[index]);
 	}
 	return true;
 }
 string XMLProcessor::returnHashString(xml_node node)
 {
 	if (node.parent().name() == "")
-		return node.name();
+		return DBStringProcessor::getOriginalTrueTableName(node.name());
 	else
-		return returnHashString(node.parent()) + "->" + node.name();
+		return returnHashString(node.parent()) + "->" + DBStringProcessor::getOriginalTrueTableName(node.name());
 }
 
 bool XMLProcessor::getExistingHashtoDBNameInfo()
